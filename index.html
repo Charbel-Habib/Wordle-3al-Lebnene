@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordle 3al Lebnene — Beirut Times</title>
+  <meta name="description" content="A daily word game in Lebanese Arabizi. Guess the word before you run out of tries.">
+
+  <!-- Bootstrap 5 (used across internal pages; layout on this page is hand-written flexbox) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fonts: Amiri (display, Arabic-rooted serif), Cairo (bilingual UI sans), JetBrains Mono (utility/labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Animated backdrop: gradient + drifting sparkle layer, the gradient stays as a readability overlay. -->
+  <div class="backdrop" id="bg-photo" aria-hidden="true">
+    <div class="backdrop__gradient"></div>
+    <div class="backdrop__sparkles" id="sparkle-layer"></div>
+    <svg class="backdrop__skyline" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,220 L0,140 L40,140 L40,110 L60,110 L60,140 L90,140 L90,90 L100,90 L100,60 L110,60 L110,90 L120,90 L120,140 L160,140 L160,120 L180,120 L180,140 L220,140 L220,70 L235,70 L235,50 L250,50 L250,70 L265,70 L265,140 L300,140 L300,100 L330,100 L330,140 L370,140 L370,80 L385,60 L400,80 L400,140 L440,140 L440,115 L470,115 L470,140 L520,140 L520,90 L540,90 L540,60 L560,60 L560,90 L580,90 L580,140 L620,140 L620,100 L650,100 L650,140 L700,140 L700,50 L715,30 L730,50 L730,140 L780,140 L780,110 L810,110 L810,140 L860,140 L860,80 L880,80 L880,60 L900,60 L900,80 L920,80 L920,140 L970,140 L970,95 L1000,95 L1000,140 L1050,140 L1050,70 L1065,50 L1080,70 L1080,140 L1130,140 L1130,110 L1160,110 L1160,140 L1210,140 L1210,90 L1230,90 L1230,60 L1250,60 L1250,90 L1270,90 L1270,140 L1320,140 L1320,100 L1360,100 L1360,140 L1440,140 L1440,220 Z" />
+    </svg>
+  </div>
+
+  <!-- Top utility bar -->
+  <header class="topbar">
+    <a class="icon-btn" id="about-link" href="about.html" aria-label="About Wordle & reader testimonials" title="About & testimonials">
+      <span class="icon-btn__glyph" aria-hidden="true">📰</span>
+    </a>
+    <button type="button" class="icon-btn" id="theme-toggle" aria-label="Switch between dark and light mode" title="Toggle theme">
+      <span class="icon-btn__glyph" id="theme-icon" aria-hidden="true">☾</span>
+    </button>
+    <button type="button" class="icon-btn" id="info-btn" aria-haspopup="dialog" aria-controls="info-modal" aria-label="How to play, history and description" title="About the game">
+      <span class="icon-btn__glyph" aria-hidden="true">؟</span>
+    </button>
+  </header>
+
+  <!-- Main start screen -->
+  <main class="hero" id="start-zone">
+    <div class="hero__content">
+      <h1 class="tile-title" id="tile-title" aria-label="Wordle 3al Lebnene">
+        <!-- Tiles are injected by JS so each letter can flip in on its own beat -->
+      </h1>
+      <p class="hero__masthead">Beirut Times &middot; Daily Word</p>
+
+      <p class="hero__prompt" id="press-prompt">Press anywhere to start game</p>
+    </div>
+    <p class="hero__hint">A new word every day, min Lebnene la Lebnene</p>
+  </main>
+
+
+  <!-- Game screen: board + on-screen keyboard. Hidden until a game starts. -->
+  <section class="game-screen" id="game-screen" hidden>
+    <!-- Ambient weather (rain/snow/thunder/meteor), picked fresh each game -->
+    <div class="weather-layer" id="weather-layer" aria-hidden="true"></div>
+    <!-- Lightning flash used for the power-outage hazard -->
+    <div class="outage-overlay" id="outage-overlay" style="z-index: -1;" aria-hidden="true"></div>
+    <!-- Centered animated popup shown while the keyboard is down -->
+    <div class="outage-popup" id="outage-popup" role="status" aria-live="assertive">
+      <span class="outage-popup__icon" aria-hidden="true">⚡</span>
+      <span class="outage-popup__text">Power outage! Keyboard is down…</span>
+    </div>
+
+    <header class="game-topbar">
+      <button type="button" class="icon-btn" id="game-back-btn" aria-label="Back to main menu" title="Back to menu">
+        <span class="icon-btn__glyph" aria-hidden="true">←</span>
+      </button>
+      <p class="game-topbar__title">Beirut Times &middot; Wordle</p>
+      <div class="game-topbar__right">
+        <button type="button" class="hint-btn" id="hint-btn" title="Reveal a letter — costs 1 try">
+          <span aria-hidden="true">💡</span> <span id="hint-count">2</span>
+        </button>
+        <p class="game-topbar__tries" id="game-tries">Try 1/6</p>
+      </div>
+    </header>
+
+    <div class="game-board" id="game-board" aria-label="Wordle board"></div>
+
+    <p class="game-message" id="game-message" aria-live="polite"></p>
+
+    <p class="game-theme" id="game-theme" aria-live="polite"></p>
+
+    <div class="keyboard" id="keyboard" aria-label="On-screen keyboard"></div>
+  </section>
+
+  <!-- Info modal: gameplay / history / description, paginated -->
+  <div class="modal-backdrop-custom" id="info-modal-backdrop" hidden></div>
+  <section class="info-modal" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-modal-title" hidden>
+    <div class="info-modal__panel">
+      <header class="info-modal__header">
+        <h2 id="info-modal-title">About The Original Wordle Game </h2>
+        <button type="button" class="icon-btn icon-btn--ghost" id="info-close" aria-label="Close">✕</button>
+      </header>
+
+      <!-- Loading state -->
+      <div class="info-modal__state" id="info-loading">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Fetching today's rules from the newsroom…</p>
+      </div>
+
+      <!-- Error state -->
+      <div class="info-modal__state" id="info-error" hidden>
+        <p>Couldn't reach the Beirut Times desk. The connection dropped.</p>
+        <button type="button" class="btn-primary" id="info-retry">Try again</button>
+      </div>
+
+      <!-- Loaded content: 3 paginated cards (gameplay / history / description) -->
+      <div class="info-modal__body" id="info-body" hidden>
+        <div class="card info-card" id="info-card">
+          <div class="card-body">
+            <span class="info-card__eyebrow" id="info-card-eyebrow">Gameplay</span>
+            <h3 class="info-card__title" id="info-card-title"></h3>
+            <p class="info-card__text" id="info-card-text"></p>
+          </div>
+        </div>
+
+        <nav class="pager" aria-label="About sections">
+          <button type="button" class="pager__arrow" id="pager-prev" aria-label="Previous section">‹</button>
+          <div class="pager__dots" id="pager-dots"></div>
+          <button type="button" class="pager__arrow" id="pager-next" aria-label="Next section">›</button>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- Result modal: shown when a game finishes (win or loss) -->
+  <div class="modal-backdrop-custom" id="result-modal-backdrop" hidden></div>
+  <section class="info-modal result-modal" id="result-modal" role="dialog" aria-modal="true" aria-labelledby="result-modal-title" hidden>
+    <div class="info-modal__panel result-modal__panel">
+      <header class="info-modal__header">
+        <h2 id="result-modal-title">Game over</h2>
+      </header>
+
+      <p class="result-modal__word">The word was <span id="result-word"></span></p>
+
+      <div class="result-modal__stats" id="result-stats"></div>
+
+      <div class="result-modal__actions">
+        <button type="button" class="btn-primary" id="result-new-game">Play again</button>
+        <button type="button" class="btn-secondary" id="result-main-menu">Main menu</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/main.js" type="module"></script>
+</body>
+</html>
