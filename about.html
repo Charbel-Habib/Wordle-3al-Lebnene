@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Wordle &amp; Testimonials — Beirut Times</title>
+  <meta name="description" content="The history of Wordle and what Beirut is saying about Wordle 3al Lebnene.">
+
+  <!-- Bootstrap 5 (used across internal pages; layout on this page is hand-written flexbox) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fonts: Amiri (display, Arabic-rooted serif), Cairo (bilingual UI sans), JetBrains Mono (utility/labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Animated backdrop: gradient + drifting sparkle layer, same as the main menu -->
+  <div class="backdrop" id="bg-photo" aria-hidden="true">
+    <div class="backdrop__gradient"></div>
+    <div class="backdrop__sparkles" id="sparkle-layer"></div>
+    <svg class="backdrop__skyline" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,220 L0,140 L40,140 L40,110 L60,110 L60,140 L90,140 L90,90 L100,90 L100,60 L110,60 L110,90 L120,90 L120,140 L160,140 L160,120 L180,120 L180,140 L220,140 L220,70 L235,70 L235,50 L250,50 L250,70 L265,70 L265,140 L300,140 L300,100 L330,100 L330,140 L370,140 L370,80 L385,60 L400,80 L400,140 L440,140 L440,115 L470,115 L470,140 L520,140 L520,90 L540,90 L540,60 L560,60 L560,90 L580,90 L580,140 L620,140 L620,100 L650,100 L650,140 L700,140 L700,50 L715,30 L730,50 L730,140 L780,140 L780,110 L810,110 L810,140 L860,140 L860,80 L880,80 L880,60 L900,60 L900,80 L920,80 L920,140 L970,140 L970,95 L1000,95 L1000,140 L1050,140 L1050,70 L1065,50 L1080,70 L1080,140 L1130,140 L1130,110 L1160,110 L1160,140 L1210,140 L1210,90 L1230,90 L1230,60 L1250,60 L1250,90 L1270,90 L1270,140 L1320,140 L1320,100 L1360,100 L1360,140 L1440,140 L1440,220 Z" />
+    </svg>
+  </div>
+
+  <!-- Top utility bar -->
+  <header class="topbar">
+    <a class="icon-btn" id="home-link" href="index.html" aria-label="Back to main menu" title="Back to menu">
+      <span class="icon-btn__glyph" aria-hidden="true">←</span>
+    </a>
+    <button type="button" class="icon-btn" id="theme-toggle" aria-label="Switch between dark and light mode" title="Toggle theme">
+      <span class="icon-btn__glyph" id="theme-icon" aria-hidden="true">☾</span>
+    </button>
+  </header>
+
+  <main class="about-page">
+    <!-- About Wordle: history section -->
+    <section class="about-hero">
+      <div class="container">
+        <p class="about-hero__eyebrow">The story so far</p>
+        <h1 class="about-hero__title">About Wordle 3al Lebnene</h1>
+        <p class="about-hero__subtitle">From a pandemic side-project to a daily ritual for millions &mdash; and now, a Lebanese edition.</p>
+      </div>
+    </section>
+
+    <section class="about-article">
+      <div class="container">
+        <div class="about-article__card">
+          <h2 class="about-article__title">How it all started</h2>
+          <p class="about-article__text">
+            This project began last month during our Web Development course, 
+            when Dr. Elias Al Zaghrini challenged us to build a complete website of our choice.
+            Whether it was an online store, a portfolio, a management system, or even a game, 
+            the only goal was to meet the project's technical requirements while creating something original.
+            As the requirements were being explained, I, Charbel Habib, found myself scrolling through my phone
+            and playing the New York Times game, Wordle.
+          </p>
+          <p class="about-article__text">
+            A few rounds later, the idea came naturally: why not recreate the same experience with a Lebanese twist?
+            Wordle is already popular among many Lebanese players, but its English vocabulary often makes winning 
+            depend more on luck than knowledge. Instead of unfamiliar English words, I wanted players to guess everyday 
+            Lebanese expressions, turning a familiar game into something that feels local, nostalgic, and fun.
+          </p>
+          <h2 class="about-article__title">Wordle 3al Lebnene</h2>
+          <p class="about-article__text">
+            This version keeps the classic one-puzzle-a-day challenge while replacing the English dictionary
+            with words every Lebanese person recognizes. The game uses the unique mix of Latin letters and 
+            numbers commonly used in WhatsApp messages and social media—to represent Arabic sounds without
+            using the Arabic alphabet.
+          </p>
+          <p class="about-article__text">
+            From popular expressions and food names to everyday slang and phrases, each puzzle celebrates the
+            way Lebanese people communicate online. The result is a game that stays true to the original Wordle
+            experience while giving it a personality that feels unmistakably Lebanese: simple, familiar, 
+            and guaranteed to bring a smile when the answer finally clicks.
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials: static Bootstrap cards -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <p class="testimonials__eyebrow">Reader mail</p>
+        <h2 class="testimonials__title">What Beirut is saying</h2>
+
+        <div class="row g-4 justify-content-center">
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card testimonial-card h-100">
+              <div class="card-body">
+                <p class="testimonial-card__stars" aria-hidden="true">★★★★★</p>
+                <p class="card-text testimonial-card__quote">"Feels like doing the crossword with teta every morning. Addicted from day one."</p>
+                <div class="testimonial-card__author">
+                  <span class="testimonial-card__name">Ghassan K.</span>
+                  <span class="testimonial-card__role">Beirut</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card testimonial-card h-100">
+              <div class="card-body">
+                <p class="testimonial-card__stars" aria-hidden="true">★★★★★</p>
+                <p class="card-text testimonial-card__quote">"Finally a Wordle that gets Lebanese slang right. Yalla, one more try before I sleep!"</p>
+                <div class="testimonial-card__author">
+                  <span class="testimonial-card__name">Maya S.</span>
+                  <span class="testimonial-card__role">Jounieh</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card testimonial-card h-100">
+              <div class="card-body">
+                <p class="testimonial-card__stars" aria-hidden="true">★★★★★</p>
+                <p class="card-text testimonial-card__quote">"Lost my six-day streak because of 'KIFAK' but couldn't stop laughing. Worth it."</p>
+                <div class="testimonial-card__author">
+                  <span class="testimonial-card__name">Elie R.</span>
+                  <span class="testimonial-card__role">Tripoli</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/about.js" type="module"></script>
+</body>
+</html>
