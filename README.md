@@ -43,9 +43,9 @@ Screenshots/         Evidence screenshots (see below)
 ## Screenshots
 
 
-[Home page](Screenshots/1.png) , [Info modal — Gameplay](Screenshots/2.png) ,
-[Info modal — Rise in popularity](Screenshots/3.png) , [Info modal — Early development (Wikipedia API)](Screenshots/4.png) , 
-[About The Original Wordle Game](Screenshots/5.png) , [About Wordle 3al Lebnene](Screenshots/6.png) ,
+[Home page dark mode On](Screenshots/1.png) , [Home Page Light Mode On](Screenshots/2.png) ,
+[Info modal — Gameplay](Screenshots/3.png) , [Info modal — Early development](Screenshots/4.png) , 
+[Info modal - Rise in Popularity](Screenshots/5.png) , [About Wordle 3al Lebnene](Screenshots/6.png) ,
 [Testimonial Cards](Screenshots/7.png) , [Gameplay / responsive view](Screenshots/8.png) 
 
 
